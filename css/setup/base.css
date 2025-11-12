@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--clr-dark-gray);
+    height: 100vh;
+}
+
+/* Main Content */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.editor {
+    background: linear-gradient(135deg, var(--clr-bgc-secondary) 10%, var(--clr-bgc-primary) 20%, var(--clr-bgc-secondary) 30%, var(--clr-bgc-primary) 40%, var(--clr-bgc-secondary) 50%, var(--clr-bgc-primary) 60%, var(--clr-bgc-secondary) 70%, var(--clr-bgc-primary) 80%, var(--clr-bgc-secondary) 90%, var(--clr-bgc-primary) 100%);
+}
+
+/* Utility Class */
+.hidden {
+    display: none;
+    /* position: absolute;
+    opacity: 0;
+    z-index: -9999; */
+}

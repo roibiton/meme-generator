@@ -1,0 +1,19 @@
+:root {
+    /* Primary Colors */
+    --clr-primary: #ff6b6b;
+    --clr-secondary: #3498db;
+    --clr-bgc-primary: #f09b9bab;
+    --clr-bgc-secondary: #bbd1e49c;
+    
+    /* Neutral Colors */
+    --clr-white: #ffffff;
+    --clr-black: #000000;
+    --clr-dark-gray: #333333;
+    --clr-light-gray: #dddddd;
+    --clr-bg-light: #f0f0f0;
+    
+    /* Opacity Colors */
+    --clr-shadow-light: rgba(0, 0, 0, 0.1);
+    --clr-shadow-medium: rgba(0, 0, 0, 0.2);
+    --clr-shadow-dark: rgba(0, 0, 0, 0.3);
+}
