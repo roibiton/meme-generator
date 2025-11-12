@@ -1,17 +1,17 @@
 /* SETUP */
-@import url('/css/setup/vars.css');
+@import url('../css/setup/vars.css');
 
 /* BASICS */
-@import url('/css/setup/base.css');
+@import url('../css/setup/base.css');
 
 
 
 /* COMPONENTS */
-@import url('/css/components/main-header.css');
-@import url('/css/components/main-gallery.css');
-@import url('/css/components/meme-editor.css');
-@import url('/css/components/main-footer.css');
+@import url('../css/components/main-header.css');
+@import url('../css/components/main-gallery.css');
+@import url('../css/components/meme-editor.css');
+@import url('../css/components/main-footer.css');
 
 
 /* MQ */
-@import url('/css/setup/mq.css');
+@import url('../css/setup/mq.css');
