@@ -1,6 +1,6 @@
 .main-footer {
     
-   min-height:50px;
+    height: 140px;
     background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-secondary) 100%);
     color: var(--clr-white);
     padding: 20px;

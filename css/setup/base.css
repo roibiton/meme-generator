@@ -7,11 +7,12 @@
 body {
     font-family: 'Segoe UI', sans-serif;
     background-color: var(--clr-dark-gray);
-    height: 100vh;
+    background: linear-gradient(135deg, var(--clr-primary-blur) 0%, var(--clr-secondary-blur) 100%);
 }
 
 /* Main Content */
 .main-content {
+    min-height: calc(100vh - 240px);
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -20,10 +21,60 @@ body {
     background: linear-gradient(135deg, var(--clr-bgc-secondary) 10%, var(--clr-bgc-primary) 20%, var(--clr-bgc-secondary) 30%, var(--clr-bgc-primary) 40%, var(--clr-bgc-secondary) 50%, var(--clr-bgc-primary) 60%, var(--clr-bgc-secondary) 70%, var(--clr-bgc-primary) 80%, var(--clr-bgc-secondary) 90%, var(--clr-bgc-primary) 100%);
 }
 
+.signature {
+  margin-top: 2%;
+  font-family: 'Roboto Mono', monospace;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid lightblue;
+  z-index: 999;
+  width: max-content;
+  margin: 10px auto;
+}
+
+.signature .label {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.signature .author {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 1.5px;
+  text-shadow:
+    0 0 5px #7c3aed,
+    0 0 10px rgba(124, 58, 237, 0.6);
+  animation: neonPulse 1.5s infinite alternate;
+}
+
+.basad {
+    position: absolute;
+    color: #ffffff;
+    letter-spacing: 2px;
+    right: 20px;
+    top: 20px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8),
+        0 0 15px #7c3aed;
+}
+
 /* Utility Class */
 .hidden {
     display: none;
     /* position: absolute;
     opacity: 0;
     z-index: -9999; */
+}
+
+@keyframes neonPulse {
+  from {
+    opacity: 0.4;
+    text-shadow: 0 0 4px #7c3aed, 0 0 8px rgba(124, 58, 237, 0.5);
+  }
+
+  to {
+    opacity: 1.0;
+    text-shadow: 0 0 6px #7c3aed, 0 0 12px rgba(124, 58, 237, 0.8);
+  }
 }
