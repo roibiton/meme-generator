@@ -166,6 +166,36 @@ function setImg(imgId) {
     gMeme.selectedImgId = imgId
 }
 
+function resetMeme() {
+    gMeme.selectedLineIdx = 0
+    gMeme.lines = [
+        {
+            txt: 'TOP TEXT',
+            size: 40,
+            color: '#ffffff',
+            strokeColor: '#000000',
+            font: 'Impact',
+            align: 'center',
+            y: 50,
+            x: 250,
+            width: 0,
+            height: 0
+        },
+        {
+            txt: 'BOTTOM TEXT',
+            size: 40,
+            color: '#ffffff',
+            strokeColor: '#000000',
+            font: 'Impact',
+            align: 'center',
+            y: 450,
+            x: 250,
+            width: 0,
+            height: 0
+        }
+    ]
+}
+
 function getImgs() {
     return gImgs
 }
@@ -185,7 +215,11 @@ function getSavedMemes() {
 }
 
 function saveMeme(memeDataUrl) {
-    gMemes.push(memeDataUrl)
+    const memeToSave = {
+        imgDataUrl: memeDataUrl,
+        memeData: JSON.parse(JSON.stringify(gMeme)) // Deep copy of current meme state
+    }
+    gMemes.push(memeToSave)
     saveToStorage(STORAGE_KEY, gMemes)
 }
 
@@ -195,8 +229,13 @@ function deleteMeme(idx) {
 }
 
 function loadMeme(idx) {
-    const memeDataUrl = gMemes[idx]
-    return memeDataUrl
+    const savedMeme = gMemes[idx]
+    if (savedMeme && savedMeme.memeData) {
+        // Restore the complete meme state
+        gMeme = JSON.parse(JSON.stringify(savedMeme.memeData))
+        return true
+    }
+    return false
 }
 
 function loadFromStorage(key) {

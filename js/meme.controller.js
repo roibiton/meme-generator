@@ -86,9 +86,10 @@ function updateEditorInputs() {
     const meme = getMeme()
     const selectedLine = meme.lines[meme.selectedLineIdx]
 
-    document.querySelector('.text-input').value = selectedLine.txt
-    document.querySelector('.color-input').value = selectedLine.color
-    document.querySelector('.font-select').value = selectedLine.font
+    document.querySelector('.text-input').value = selectedLine.txt || ''
+    document.querySelector('.color-input').value = selectedLine.color || '#ffffff'
+    document.querySelector('.stroke-color-input').value = selectedLine.strokeColor || '#000000'
+    document.querySelector('.font-select').value = selectedLine.font || 'Impact'
 }
 
 function renderMeme() {
@@ -182,7 +183,13 @@ function showSavedMemes() {
     document.querySelector('.editor').classList.add('hidden')
     document.querySelector('.saved-memes-section').classList.remove('hidden')
     const savedMemes = getSavedMemes()
-    const strHTMLs = savedMemes.map((memeDataURL) => `<img src="${memeDataURL}" onclick="alert('hi1')" /> `)
+    const strHTMLs = savedMemes.map((savedMeme, idx) => {
+        const imgSrc = savedMeme.imgDataUrl || savedMeme // Handle both old and new format
+        return `<section class="saved-meme">
+        <img src="${imgSrc}" class="saved-meme-img" onclick="onSavedImgSelect(${idx})" />
+        <button class="delete-meme-btn" onclick="onDeleteSavedMeme(event, ${idx})"><i class="fa-solid fa-trash"></i></button>
+    </section>`
+    })
 
     const elSavedMemesContainer = document.querySelector('.saved-memes-container')
     elSavedMemesContainer.innerHTML = strHTMLs.join('')
@@ -190,4 +197,29 @@ function showSavedMemes() {
     if (savedMemes.length === 0) {
         elSavedMemesContainer.innerHTML = '<p>No saved memes yet.</p>'
     }
+}
+
+function onSavedImgSelect(idx) {
+    // Load the saved meme data
+    const success = loadMeme(idx)
+    
+    if (success) {
+        // Switch to editor view
+        showEditor()
+        
+        // Update all editor inputs to reflect the loaded meme
+        updateEditorInputs()
+        
+        // Render the meme on canvas
+        renderMeme()
+    } else {
+        alert('Failed to load saved meme')
+    }
+}
+
+function onDeleteSavedMeme(ev, idx) {
+    ev.stopPropagation() // Prevent triggering onSavedImgSelect
+    deleteMeme(idx)
+    showSavedMemes()
+
 }
