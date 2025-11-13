@@ -54,38 +54,61 @@ function setLineTxt(txt) {
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
 
+function getSelectedLine() {
+    return gMeme.lines[gMeme.selectedLineIdx]
+}
+
 function setLineColor(color) {
-    gMeme.lines[gMeme.selectedLineIdx].color = color
+    const line = getSelectedLine()
+    if (!line) return
+    line.color = color
 }
 
 function setLineStrokeColor(color) {
-    gMeme.lines[gMeme.selectedLineIdx].strokeColor = color
+    const line = getSelectedLine()
+    if (!line) return
+    line.strokeColor = color
 }
 
 function setLineFont(font) {
-    gMeme.lines[gMeme.selectedLineIdx].font = font
+    const line = getSelectedLine()
+    if (!line) return
+    line.font = font
 }
 
 function setLineAlign(align) {
-    gMeme.lines[gMeme.selectedLineIdx].align = align
+    const line = getSelectedLine()
+    if (!line) return
+    line.align = align
 }
 
 function increaseFontSize() {
-    gMeme.lines[gMeme.selectedLineIdx].size += 5
+    const line = getSelectedLine()
+    if (!line) return
+    if (line.size < 80) {
+        line.size += 5
+    }
 }
 
 function decreaseFontSize() {
-    if (gMeme.lines[gMeme.selectedLineIdx].size > 10) {
-        gMeme.lines[gMeme.selectedLineIdx].size -= 5
+    const line = getSelectedLine()
+    if (!line) return
+    if (line.size > 15) {
+        line.size -= 5
     }
 }
 
 function moveLineUp() {
-    gMeme.lines[gMeme.selectedLineIdx].y -= 10
+    const line = getSelectedLine()
+    if (!line) return
+    if (line.y < line.size) return
+    line.y -= 10
 }
 
 function moveLineDown() {
-    gMeme.lines[gMeme.selectedLineIdx].y += 10
+    const line = getSelectedLine()
+    if (!line) return
+    line.y += 10
 }
 
 function addLine() {
@@ -118,14 +141,15 @@ function deleteLine() {
 }
 
 function setLinePos(lineIdx, x, y, width, height) {
-    gMeme.lines[lineIdx].x = x
-    gMeme.lines[lineIdx].y = y
-    gMeme.lines[lineIdx].width = width
-    gMeme.lines[lineIdx].height = height
+    const line = gMeme.lines[lineIdx]
+    line.x = x
+    line.y = y
+    line.width = width
+    line.height = height
 }
 
 function selectLineByPos(clickX, clickY) {
-    for (let i = gMeme.lines.length-1; i >= 0; i--) {
+    for (let i = gMeme.lines.length - 1; i >= 0; i--) {
         const line = gMeme.lines[i]
         if (clickX >= line.x - line.width / 2 &&
             clickX <= line.x + line.width / 2 &&
