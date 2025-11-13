@@ -170,10 +170,27 @@ function drawText(line, isSelected) {
         gCtx.setLineDash([])
     }
 }
-
+// SAVED MEMES
 function onSaveMeme() {
     const dataURL = gElCanvas.toDataURL('image/png')
     saveMeme(dataURL)
-    alert('Meme saved successfully! Check the Saved Memes section.')
 }
 
+function showSavedMemes() {
+    document.querySelector('.gallery-section').classList.add('hidden')
+    document.querySelector('.editor').classList.remove('editor-section')
+    document.querySelector('.editor').classList.add('hidden')
+    document.querySelector('.saved-memes-section').classList.remove('hidden')
+    const savedMemes = getSavedMemes()
+    const elSavedMemesContainer = document.querySelector('.saved-memes-container')
+    elSavedMemesContainer.innerHTML = ''
+    if (savedMemes.length === 0) {
+        elSavedMemesContainer.innerHTML = '<p>No saved memes yet.</p>'
+        return
+    }
+    savedMemes.forEach((memeDataURL, index) => {
+        const elImg = document.createElement('img')
+        elImg.src = memeDataURL
+        elSavedMemesContainer.appendChild(elImg)
+    })
+}

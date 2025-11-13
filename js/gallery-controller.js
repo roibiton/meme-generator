@@ -26,12 +26,14 @@ function onBackToGallery() {
 
 function showEditor() {
     document.querySelector('.gallery-section').classList.add('hidden')
+    document.querySelector('.saved-memes-section').classList.add('hidden')
     document.querySelector('.editor').classList.add('editor-section')
     document.querySelector('.editor').classList.remove('hidden')
 }
 
 function showGallery() {
     document.querySelector('.gallery-section').classList.remove('hidden')
+    document.querySelector('.saved-memes-section').classList.add('hidden')
     document.querySelector('.editor').classList.remove('editor-section')
     document.querySelector('.editor').classList.add('hidden')
 }

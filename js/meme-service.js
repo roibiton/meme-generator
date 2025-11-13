@@ -150,3 +150,32 @@ function getImgById(imgId) {
     return gImgs.find(img => img.id === imgId)
 }
 
+// SAVED MEMES
+
+const STORAGE_KEY = 'memesDB'
+
+var gMemes = loadFromStorage(STORAGE_KEY) || []
+
+function getSavedMemes() {
+    return gMemes
+}
+
+function saveMeme(memeDataUrl) {
+    gMemes.push(memeDataUrl)
+    saveToStorage(STORAGE_KEY, gMemes)
+}
+
+function deleteMeme(idx) {
+    gMemes.splice(idx, 1)
+    saveToStorage(STORAGE_KEY, gMemes)
+}
+
+function loadMeme(idx) {
+    const memeDataUrl = gMemes[idx]
+    return memeDataUrl
+}
+
+function loadFromStorage(key) {
+    const data = localStorage.getItem(key)
+    return data ? JSON.parse(data) : null
+}
