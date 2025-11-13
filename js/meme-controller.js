@@ -171,3 +171,9 @@ function drawText(line, isSelected) {
     }
 }
 
+function onSaveMeme() {
+    const dataURL = gElCanvas.toDataURL('image/png')
+    saveMeme(dataURL)
+    alert('Meme saved successfully! Check the Saved Memes section.')
+}
+

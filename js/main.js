@@ -12,3 +12,7 @@ function onShowGallery() {
 function onShowEditor() {
     showEditor()
 }
+
+function onShowSavedMemes() {
+    showSavedMemes()
+}

@@ -47,6 +47,8 @@
                             oninput="onStrokeColorChange(this.value)">
                     </label>
 
+                    <button class="btn-control" onclick="onIncreaseFontSize()">A+</button>
+                    <button class="btn-control" onclick="onDecreaseFontSize()">A-</button>
                 </div>
 
                 <div class="control-row">
@@ -58,31 +60,23 @@
                             <option value="Times New Roman">Times New Roman</option>
                         </select>
                     </label>
-                    <button class="btn-control" onclick="onIncreaseFontSize()">A+</button>
-                    <button class="btn-control" onclick="onDecreaseFontSize()">A-</button>
                 </div>
 
                 <div class="control-row">
-                    <button class="btn-control" onclick="onAlignText('left')"><i
-                            class="fa-solid fa-align-left"></i></button>
-                    <button class="btn-control" onclick="onAlignText('center')"><i
-                            class="fa-solid fa-align-center"></i></button>
-                    <button class="btn-control" onclick="onAlignText('right')"><i
-                            class="fa-solid fa-align-right"></i></button>
+                    <button class="btn-control" onclick="onAlignText('left')">⬅ Left</button>
+                    <button class="btn-control" onclick="onAlignText('center')">↔ Center</button>
+                    <button class="btn-control" onclick="onAlignText('right')">➡ Right</button>
                 </div>
 
                 <div class="control-row">
-                    <button class="btn-control" onclick="onMoveLineUp()"><i class="fa-solid fa-up-long"></i></button>
-                    <button class="btn-control" onclick="onMoveLineDown()"><i
-                            class="fa-solid fa-down-long"></i></button>
+                    <button class="btn-control" onclick="onMoveLineUp()">⬆ Move Up</button>
+                    <button class="btn-control" onclick="onMoveLineDown()">⬇ Move Down</button>
                 </div>
 
                 <div class="control-row">
-                    <button class="btn-control" onclick="onAddLine()"><i class="fa-solid fa-plus"></i></button>
-                    <button class="btn-control" onclick="onSwitchLine()"><i
-                            class="fa-solid fa-arrows-rotate"></i></button>
-                    <button class="btn-control btn-delete" onclick="onDeleteLine()"><i
-                            class="fa-solid fa-trash"></i></button>
+                    <button class="btn-control" onclick="onAddLine()">➕ Add Line</button>
+                    <button class="btn-control" onclick="onSwitchLine()">🔄 Switch Line</button>
+                    <button class="btn-control btn-delete" onclick="onDeleteLine()">🗑 Delete Line</button>
                 </div>
 
                 <div class="control-row">
@@ -94,16 +88,6 @@
 
     <footer class="main-footer">
         <p>&copy; 2025 Meme Generator. All rights reserved.</p>
-        <div class="signature">
-            <span class="label">CREATED BY:</span>
-            <span class="author">ROI</span>
-        </div>
-        <section>
-            <i class="fa-brands fa-facebook"></i>
-            <i class="fa-brands fa-twitter"></i>
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-linkedin"></i>
-        </section>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
