@@ -12,6 +12,7 @@
 </head>
 
 <body onload="onInit()">
+    <div class="main-screen" onclick="toggleMenu()"></div>
     <header class="main-header">
         <h1>Meme Generator</h1>
         <nav class="main-nav">
@@ -19,6 +20,7 @@
             <a onclick="onShowSavedMemes()">Saved-Memes</a>
             <a onclick="onShowEditor()">Editor</a>
         </nav>
+        <button class="btn-toggle-menu" onclick="toggleMenu()">☰</button>
     </header>
 
     <main class="main-content">
