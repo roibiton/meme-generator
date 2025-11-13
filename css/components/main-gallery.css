@@ -4,6 +4,48 @@
         margin-bottom: 20px;
         color: var(--clr-dark-gray);
     }
+    & .filter-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+        padding: 20px;
+        & .keyword-word {
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: capitalize;
+            transition: color 0.3s;
+            color: var(--clr-dark-gray);
+            user-select: none;
+            &:hover {
+                color: var(--clr-primary);
+            }
+            &.active {
+                color: var(--clr-primary);
+            }
+        }
+        & .filter-btn {
+            padding: 8px 16px;
+            background-color: var(--clr-white);
+            color: var(--clr-primary);
+            border: 2px solid var(--clr-primary);
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            text-transform: capitalize;
+            transition: all 0.3s;
+            &:hover {
+                background-color: var(--clr-primary);
+                color: var(--clr-white);
+            }
+            &.active {
+                background-color: var(--clr-primary);
+                color: var(--clr-white);
+            }
+        }
+    }
     & .gallery-container {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

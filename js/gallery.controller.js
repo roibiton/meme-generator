@@ -1,7 +1,10 @@
 'use strict'
 
 function renderGallery() {
+    renderKeywordFilter()
     const imgs = getImgs()
+    console.log(imgs)
+    
     const elGalleryContainer = document.querySelector('.gallery-container')
     
     const strHtmls = imgs.map(img => `
@@ -12,6 +15,36 @@ function renderGallery() {
     `)
     
     elGalleryContainer.innerHTML = strHtmls.join('')
+}
+
+function renderKeywordFilter() {
+    const keywords = getAllKeywords()
+    const keywordCounts = getKeywordCounts()
+    const elFilterContainer = document.querySelector('.filter-container')
+    const currentFilter = getFilter()
+    
+    const strHtmls = keywords.map(keyword => {
+        const count = keywordCounts[keyword]
+        const fontSize = 16 + (count*2)
+        const isActive = currentFilter === keyword
+        
+        return `<span class="keyword-word ${isActive ? 'active' : ''}" 
+                     style="font-size: ${fontSize}px" 
+                     onclick="onSetFilter('${keyword}')">${keyword}</span>`
+    })
+    
+    elFilterContainer.innerHTML = `
+        <span class="keyword-word ${!currentFilter ? 'active' : ''}" 
+              style="font-size: 20px" 
+              onclick="onSetFilter(null)">All</span>
+        ${strHtmls.join('')}
+    `
+}
+
+function onSetFilter(keyword) {
+    // Convert string 'null' to actual null
+    setFilter(keyword)
+    renderGallery()
 }
 
 function onImgSelect(imgId) {

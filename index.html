@@ -25,6 +25,7 @@
         <!-- Gallery Section -->
         <section class="gallery-section">
             <h2>Choose an Image</h2>
+            <div class="filter-container"></div>
             <div class="gallery-container"></div>
         </section>
 
@@ -48,7 +49,7 @@
                     </label>
 
                 </div>
-                
+
                 <div class="control-row">
                     <label>Font:
                         <select class="font-select" onchange="onFontChange(this.value)">
@@ -63,26 +64,42 @@
                 </div>
 
                 <div class="control-row">
-                    <button class="btn-control" onclick="onAlignText('left')"><i class="fa-solid fa-align-left"></i></button>
-                    <button class="btn-control" onclick="onAlignText('center')"><i class="fa-solid fa-align-center"></i></button>
-                    <button class="btn-control" onclick="onAlignText('right')"><i class="fa-solid fa-align-right"></i></button>
+                    <button class="btn-control" onclick="onAlignText('left')"><i
+                            class="fa-solid fa-align-left"></i></button>
+                    <button class="btn-control" onclick="onAlignText('center')"><i
+                            class="fa-solid fa-align-center"></i></button>
+                    <button class="btn-control" onclick="onAlignText('right')"><i
+                            class="fa-solid fa-align-right"></i></button>
                 </div>
 
                 <div class="control-row">
                     <button class="btn-control" onclick="onMoveLineUp()"><i class="fa-solid fa-up-long"></i></button>
-                    <button class="btn-control" onclick="onMoveLineDown()"><i class="fa-solid fa-down-long"></i></button>
+                    <button class="btn-control" onclick="onMoveLineDown()"><i
+                            class="fa-solid fa-down-long"></i></button>
                 </div>
 
                 <div class="control-row">
                     <button class="btn-control" onclick="onAddLine()"><i class="fa-solid fa-plus"></i></button>
-                    <button class="btn-control" onclick="onSwitchLine()"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
-                    <button class="btn-control btn-delete" onclick="onDeleteLine()"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn-control" onclick="onSwitchLine()"><i
+                            class="fa-solid fa-arrow-right-arrow-left"></i></button>
+                    <button class="btn-control btn-delete" onclick="onDeleteLine()"><i
+                            class="fa-solid fa-trash"></i></button>
                 </div>
 
                 <div class="control-row">
                     <button class="btn-save" onclick="onSaveMeme()">💾 Save Meme</button>
                     <button class="btn-back" onclick="onBackToGallery()">⬅ Back to Gallery</button>
                 </div>
+                <section class="load-controls control-row">
+                    <a id="download" href="#" class="btn" onclick="downloadCanvas(this)" download="my-meme.jpg"><i
+                            class="fa-solid fa-cloud-arrow-down"></i></a>
+                    <label for="upload"><i class="fa-solid fa-cloud-arrow-up"></i></label>
+                    <input hidden type="file" id="upload" class="file-input btn" name="image"
+                        onchange="onImgInput(event)" />
+                    <form method="POST" enctype="multipart/form-data" onsubmit="onShareImg(event)">
+                        <button class="btn" type="submit"><i class="fa-solid fa-share-nodes"></i></button>
+                    </form>
+                </section>
             </div>
         </section>
         <!-- Saved Memes Section -->
@@ -95,24 +112,26 @@
     <footer class="main-footer">
         <p>&copy; 2025 Meme Generator. All rights reserved.</p>
         <div class="signature">
-      <span class="label">CREATED BY:</span>
-      <span class="author">ROI</span>
-    </div>
-    <section>
-      <i class="fa-brands fa-facebook"></i>
-      <i class="fa-brands fa-twitter"></i>
-      <i class="fa-brands fa-instagram"></i>
-      <i class="fa-brands fa-linkedin"></i>
-    </section>
+            <span class="label">CREATED BY:</span>
+            <span class="author">ROI</span>
+        </div>
+        <section>
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-linkedin"></i>
+        </section>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/9b24523c58.js" crossorigin="anonymous"></script>
+
     <script src="js/storage.service.js"></script>
     <script src="js/meme.service.js"></script>
     <script src="js/gallery.controller.js"></script>
     <script src="js/meme.controller.js"></script>
+    <script src="js/load-logic.js"></script>
     <script src="js/main.js"></script>
 </body>
 
