@@ -101,13 +101,10 @@ function renderMeme() {
     img.src = imgData.url
 
     img.onload = () => {
-        // Clear canvas
         gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 
-        // Draw the image
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 
-        // Draw all lines
         meme.lines.forEach((line, idx) => {
             drawText(line, idx === meme.selectedLineIdx)
         })
@@ -123,23 +120,20 @@ function drawText(line, isSelected) {
     gCtx.textAlign = line.align
     gCtx.textBaseline = 'middle'
 
-    // Calculate text position based on alignment
     let x = line.x
     if (line.align === 'center') {
         x = gElCanvas.width / 2
     } else if (line.align === 'left') {
-        x = 50
+        x = 30
     } else if (line.align === 'right') {
-        x = gElCanvas.width - 50
+        x = gElCanvas.width - 30
     }
 
     const y = line.y
 
-    // Draw text
     gCtx.fillText(line.txt, x, y)
     gCtx.strokeText(line.txt, x, y)
 
-    // Store position and size for click detection
     const textMetrics = gCtx.measureText(line.txt)
     console.log(textMetrics);
 
@@ -148,7 +142,6 @@ function drawText(line, isSelected) {
 
     setLinePos(meme.lines.indexOf(line), x, y, width, height)
 
-    // Draw frame around selected line
     if (isSelected) {
         gCtx.strokeStyle = '#ff6b6b'
         gCtx.lineWidth = 3
@@ -184,7 +177,7 @@ function showSavedMemes() {
     document.querySelector('.saved-memes-section').classList.remove('hidden')
     const savedMemes = getSavedMemes()
     const strHTMLs = savedMemes.map((savedMeme, idx) => {
-        const imgSrc = savedMeme.imgDataUrl || savedMeme // Handle both old and new format
+        const imgSrc = savedMeme.imgDataUrl || savedMeme 
         return `<section class="saved-meme">
         <img src="${imgSrc}" class="saved-meme-img" onclick="onSavedImgSelect(${idx})" />
         <button class="delete-meme-btn" onclick="onDeleteSavedMeme(event, ${idx})"><i class="fa-solid fa-trash"></i></button>
@@ -200,17 +193,10 @@ function showSavedMemes() {
 }
 
 function onSavedImgSelect(idx) {
-    // Load the saved meme data
     const success = loadMeme(idx)
-    
     if (success) {
-        // Switch to editor view
         showEditor()
-        
-        // Update all editor inputs to reflect the loaded meme
         updateEditorInputs()
-        
-        // Render the meme on canvas
         renderMeme()
     } else {
         alert('Failed to load saved meme')
@@ -218,7 +204,7 @@ function onSavedImgSelect(idx) {
 }
 
 function onDeleteSavedMeme(ev, idx) {
-    ev.stopPropagation() // Prevent triggering onSavedImgSelect
+    ev.stopPropagation() 
     deleteMeme(idx)
     showSavedMemes()
 

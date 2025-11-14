@@ -42,7 +42,6 @@ function renderKeywordFilter() {
 }
 
 function onSetFilter(keyword) {
-    // Convert string 'null' to actual null
     setFilter(keyword)
     renderGallery()
 }

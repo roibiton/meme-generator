@@ -163,6 +163,7 @@ function moveLineUp() {
 function moveLineDown() {
     const line = getSelectedLine()
     if (!line) return
+    if (line.y > gElCanvas.height - line.size) return
     line.y += 10
 }
 
@@ -268,7 +269,7 @@ function getSavedMemes() {
 function saveMeme(memeDataUrl) {
     const memeToSave = {
         imgDataUrl: memeDataUrl,
-        memeData: JSON.parse(JSON.stringify(gMeme)) // Deep copy of current meme state
+        memeData: JSON.parse(JSON.stringify(gMeme)) 
     }
     gMemes.push(memeToSave)
     saveToStorage(STORAGE_KEY, gMemes)
@@ -282,7 +283,6 @@ function deleteMeme(idx) {
 function loadMeme(idx) {
     const savedMeme = gMemes[idx]
     if (savedMeme && savedMeme.memeData) {
-        // Restore the complete meme state
         gMeme = JSON.parse(JSON.stringify(savedMeme.memeData))
         return true
     }
