@@ -118,7 +118,7 @@
 }
 
 /* small devices only */
-@media (max-width: 370px) {
+@media (max-width: 470px) {
     body {
         font-size: 0.7em;
     }
@@ -131,6 +131,9 @@
             }
         }
     }
-
-
+    .gallery-section{
+        & .gallery-container {
+            gap: 25px;
+        }
+    }
 }
