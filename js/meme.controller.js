@@ -168,6 +168,7 @@ function drawText(line, isSelected) {
 function onSaveMeme() {
     const dataURL = gElCanvas.toDataURL('image/png')
     saveMeme(dataURL)
+    showSavedMemes()
 }
 
 function showSavedMemes() {

@@ -25,7 +25,7 @@ function renderKeywordFilter() {
     
     const strHtmls = keywords.map(keyword => {
         const count = keywordCounts[keyword]
-        const fontSize = 16 + (count*2)
+        const fontSize = 16 + (count*2.2)
         const isActive = currentFilter === keyword
         
         return `<span class="keyword-word ${isActive ? 'active' : ''}" 
