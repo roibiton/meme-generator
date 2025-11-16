@@ -1,6 +1,7 @@
 'use strict'
 
 function onInit() {
+    document.querySelector('.gallery-btn').classList.add('chosen')
     renderGallery()
 }
 
