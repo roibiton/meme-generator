@@ -42,6 +42,11 @@
         position: relative;
     }
 
+    .basad {
+        left: 20px;
+        right: auto;
+    }
+
     .main-nav {
         position: absolute;
         flex-direction: column;
@@ -62,20 +67,20 @@
 
         & a {
             width: 100%;
-            padding: 1em;
+            padding: 0.5em;
             transition: background-color .4s;
-            border-bottom: 1px solid #ccc;
+            border-bottom: none;
             display: block;
             text-align: center;
-            color: var(--clr-dark-gray);
 
             &:hover {
-                color: var(--clr-primary) !important;
+                color: var(--clr-light-gray);
             }
-        }
-
-        & a:last-child {
-            border-bottom: none;
+            
+            &.chosen {
+                color: var(--clr-primary);
+                border-bottom: none;
+            }
         }
     }
 

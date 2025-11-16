@@ -13,6 +13,7 @@
     top: 20px;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.8),
         0 0 15px #7c3aed;
+    z-index: 101;
 }
 
 body {
