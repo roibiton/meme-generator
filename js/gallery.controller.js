@@ -46,6 +46,8 @@ function onSetFilter(keyword) {
 }
 
 function onImgSelect(imgId) {
+    const editorNavBtn=document.querySelector('.editor-btn')
+    highlightNavBtn(editorNavBtn)
     setImg(imgId)
     resetMeme()
     showEditor()
@@ -54,6 +56,8 @@ function onImgSelect(imgId) {
 }
 
 function onBackToGallery() {
+    const galleryNavBtn=document.querySelector('.gallery-btn')
+    highlightNavBtn(galleryNavBtn)
     showGallery()
 }
 

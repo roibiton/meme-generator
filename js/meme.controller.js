@@ -262,6 +262,8 @@ function showSavedMemes() {
     document.querySelector('.editor').classList.remove('editor-section')
     document.querySelector('.editor').classList.add('hidden')
     document.querySelector('.saved-memes-section').classList.remove('hidden')
+    const galleryNavBtn=document.querySelector('.saved-memes-btn')
+    highlightNavBtn(galleryNavBtn)
     const savedMemes = getSavedMemes()
     const strHTMLs = savedMemes.map((savedMeme, idx) => {
         const imgSrc = savedMeme.imgDataUrl || savedMeme 

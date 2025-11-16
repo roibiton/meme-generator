@@ -1,16 +1,20 @@
 .main-nav {
-    padding:0px 20px;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    gap: 20px;
+    place-content: center;
     & a {
         font-weight: bold;
         border-radius: 5px;
         transition: color 0.3s;
+        text-decoration: none;
+        color: inherit;
         &:hover {
             cursor: pointer;
-            color: var(--clr-dark-gray) !important;
+            color: var(--clr-dark-gray);
         }
-        
+        &.chosen {
+            color: var(--clr-primary);
+            border-bottom: 2px solid var(--clr-primary);
     }
+}
 }

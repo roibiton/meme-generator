@@ -4,17 +4,20 @@ function onInit() {
     renderGallery()
 }
 
-function onShowGallery() {
+function onShowGallery(elNavBtn) {
+    highlightNavBtn(elNavBtn)
     showGallery()
     closeMenu()
 }
 
-function onShowEditor() {
+function onShowEditor(elNavBtn) {
+    highlightNavBtn(elNavBtn)
     showEditor()
     closeMenu()
 }
 
-function onShowSavedMemes() {
+function onShowSavedMemes(elNavBtn) {
+    highlightNavBtn(elNavBtn)
     showSavedMemes()
     closeMenu()
 }
@@ -25,4 +28,10 @@ function toggleMenu() {
 
 function closeMenu() {
     document.body.classList.remove('menu-open');
+}
+
+function highlightNavBtn(elNavBtn) {
+    const elNavBtns = document.querySelectorAll('.main-nav a')
+    elNavBtns.forEach(btn => btn.classList.remove('chosen'))
+    elNavBtn.classList.add('chosen')
 }
