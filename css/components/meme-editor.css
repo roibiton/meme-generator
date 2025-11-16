@@ -4,6 +4,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto auto 1fr;
     gap: 20px;
+    padding: 20px;
     & h2 {
         margin-bottom: 0;
         color: var(--clr-dark-gray);
@@ -11,7 +12,7 @@
     }
     & .canvas-container {
         display: inline-block;
-        box-shadow: 0 4px 8px var(--clr-shadow-medium);
+        box-shadow: 0 2px 4px var(--clr-shadow-medium);
         background-color: var(--clr-white);
         & canvas {
             display: block;
@@ -20,7 +21,6 @@
         }
     }
     & .editor-controls {
-        margin-top: 20px;
         max-width: 600px;
         margin-left: auto;
         margin-right: auto;
@@ -110,7 +110,9 @@
         & .load-controls {
             display: flex;
             justify-content: space-around;
+            margin: 0;
             & label, & a, & form button {
+                padding: 0;
                 font-size: 20px;
                 color: var(--clr-primary);
                 transition: color 0.3s, transform 0.3s;

@@ -181,8 +181,7 @@ function onTouchEnd(event) {
 function updateEditorInputs() {
     const meme = getMeme()
     const selectedLine = meme.lines[meme.selectedLineIdx]
-
-    
+ 
     document.querySelector('.text-input').value = selectedLine.txt || ''
     document.querySelector('.color-input').value = selectedLine.color || '#ffffff'
     document.querySelector('.stroke-color-input').value = selectedLine.strokeColor || '#000000'
