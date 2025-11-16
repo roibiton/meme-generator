@@ -58,11 +58,8 @@ function getMeme() {
 }
 
 function getImgs() {
-    console.log('Current filter:', gFilterKeyword)
     if (!gFilterKeyword) return gImgs
-    const filtered = gImgs.filter(img => img.keywords.includes(gFilterKeyword))
-    console.log('Filtered images:', filtered.length)
-    return filtered
+    return gImgs.filter(img => img.keywords.includes(gFilterKeyword))
 }
 
 function getAllKeywords() {
@@ -86,7 +83,6 @@ function getKeywordCounts() {
 }
 
 function setFilter(keyword) {
-    console.log('Setting filter to:', keyword)
     gFilterKeyword = keyword
 }
 
@@ -113,6 +109,11 @@ function getSelectedLine() {
     return gMeme.lines[gMeme.selectedLineIdx]
 }
 
+function setSelectedLine(idx) {
+    gMeme.selectedLineIdx = idx
+}
+
+
 function setLineColor(color) {
     const line = getSelectedLine()
     if (!line) return
@@ -131,10 +132,17 @@ function setLineFont(font) {
     line.font = font
 }
 
-function setLineAlign(align) {
+function setLineAlign(align, canvasWidth = 500) {
     const line = getSelectedLine()
     if (!line) return
     line.align = align
+    if (align === 'center') {
+        line.x = canvasWidth / 2
+    } else if (align === 'left') {
+        line.x = 30
+    } else if (align === 'right') {
+        line.x = canvasWidth - 30
+    }
 }
 
 function increaseFontSize() {
@@ -198,8 +206,6 @@ function deleteLine() {
 
 function setLinePos(lineIdx, x, y, width, height) {
     const line = gMeme.lines[lineIdx]
-    line.x = x
-    line.y = y
     line.width = width
     line.height = height
 }
@@ -207,8 +213,21 @@ function setLinePos(lineIdx, x, y, width, height) {
 function selectLineByPos(clickX, clickY) {
     for (let i = gMeme.lines.length - 1; i >= 0; i--) {
         const line = gMeme.lines[i]
-        if (clickX >= line.x - line.width / 2 &&
-            clickX <= line.x + line.width / 2 &&
+        
+        let minX, maxX
+        if (line.align === 'left') {
+            minX = line.x
+            maxX = line.x + line.width
+        } else if (line.align === 'right') {
+            minX = line.x - line.width
+            maxX = line.x
+        } else { 
+            minX = line.x - line.width / 2
+            maxX = line.x + line.width / 2
+        }
+        
+        if (clickX >= minX &&
+            clickX <= maxX &&
             clickY >= line.y - line.height / 2 &&
             clickY <= line.y + line.height / 2) {
             gMeme.selectedLineIdx = i
@@ -216,6 +235,64 @@ function selectLineByPos(clickX, clickY) {
         }
     }
     return false
+}
+
+function getLineIdxByPos(clickX, clickY) {
+    for (let i = gMeme.lines.length - 1; i >= 0; i--) {
+        const line = gMeme.lines[i]
+        const padding = 10
+        
+        let minX, maxX
+        if (line.align === 'left') {
+            minX = line.x - padding
+            maxX = line.x + line.width + padding
+        } else if (line.align === 'right') {
+            minX = line.x - line.width - padding
+            maxX = line.x + padding
+        } else { 
+            minX = line.x - line.width / 2 - padding
+            maxX = line.x + line.width / 2 + padding
+        }
+        
+        if (clickX >= minX &&
+            clickX <= maxX &&
+            clickY >= line.y - line.height / 2 - padding &&
+            clickY <= line.y + line.height / 2 + padding) {
+            return i
+        }
+    }
+    return -1
+}
+
+function moveLineTo(lineIdx, dx, dy, canvasWidth = 500, canvasHeight = 500) {
+    const line = gMeme.lines[lineIdx]
+    const padding = 10
+    
+    let newX = line.x + dx
+    let newY = line.y + dy
+    
+    const halfHeight = line.height / 2
+    
+    let minX, maxX
+    if (line.align === 'left') {
+        minX = padding
+        maxX = canvasWidth - line.width - padding
+    } else if (line.align === 'right') {
+        minX = line.width + padding
+        maxX = canvasWidth - padding
+    } else { 
+        minX = line.width / 2 + padding
+        maxX = canvasWidth - line.width / 2 - padding
+    }
+    
+    newX = Math.max(minX, Math.min(maxX, newX))
+    
+    const minY = halfHeight + padding
+    const maxY = canvasHeight - halfHeight - padding
+    newY = Math.max(minY, Math.min(maxY, newY))
+    
+    line.x = newX
+    line.y = newY
 }
 
 function setImg(imgId) {
@@ -287,9 +364,4 @@ function loadMeme(idx) {
         return true
     }
     return false
-}
-
-function loadFromStorage(key) {
-    const data = localStorage.getItem(key)
-    return data ? JSON.parse(data) : null
 }

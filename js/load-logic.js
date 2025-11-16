@@ -14,8 +14,6 @@ function downloadCanvas(elLink) {
     
     // Render without selection frame
     renderMeme()
-    
-    // Wait for render to complete, then capture
     setTimeout(() => {
         const canvasContent = canvas.toDataURL('image/jpeg')
         elLink.href = canvasContent
@@ -45,7 +43,6 @@ function loadImageFromInput(ev, onImageReady) {
 }
 
 function onUploadedImg(img) {
-    // Convert image to data URL
     const canvas = document.createElement('canvas')
     canvas.width = img.width
     canvas.height = img.height
@@ -53,10 +50,8 @@ function onUploadedImg(img) {
     ctx.drawImage(img, 0, 0)
     const imgDataUrl = canvas.toDataURL()
     
-    // Add to gallery
     const newImgId = addUploadedImg(imgDataUrl)
     
-    // Set as active meme and switch to editor
     setImg(newImgId)
     resetMeme()
     showEditor()
@@ -72,22 +67,16 @@ function onShareImg(ev) {
         return
     }
     
-    // Temporarily deselect line to upload clean image
     const meme = getMeme()
     const originalSelectedIdx = meme.selectedLineIdx
     meme.selectedLineIdx = -1
     
-    // Render without selection frame
     renderMeme()
     
-    // Wait for render to complete, then capture and upload
     setTimeout(() => {
         const canvasData = canvas.toDataURL('image/jpeg')
-        
-        // After a successful upload, allow the user to share on Facebook
         function onSuccess(uploadedImgUrl) {
             const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
-            console.log('encodedUploadedImgUrl:', encodedUploadedImgUrl)
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)
         }
         
@@ -112,11 +101,9 @@ async function uploadImg(imgData, onSuccess) {
             body: formData
         })
         const data = await res.json()
-        console.log('Cloudinary response:', data)
         onSuccess(data.secure_url)
-
     } catch (err) {
-        console.log(err)
+        console.error('Upload failed:', err)
     }
 }
 

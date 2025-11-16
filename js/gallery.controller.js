@@ -3,7 +3,6 @@
 function renderGallery() {
     renderKeywordFilter()
     const imgs = getImgs()
-    console.log(imgs)
     
     const elGalleryContainer = document.querySelector('.gallery-container')
     
