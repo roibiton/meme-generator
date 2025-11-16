@@ -240,24 +240,21 @@ function selectLineByPos(clickX, clickY) {
 function getLineIdxByPos(clickX, clickY) {
     for (let i = gMeme.lines.length - 1; i >= 0; i--) {
         const line = gMeme.lines[i]
-        const padding = 10
-        
         let minX, maxX
         if (line.align === 'left') {
-            minX = line.x - padding
-            maxX = line.x + line.width + padding
+            minX = line.x
+            maxX = line.x + line.width
         } else if (line.align === 'right') {
-            minX = line.x - line.width - padding
-            maxX = line.x + padding
+            minX = line.x - line.width
+            maxX = line.x
         } else { 
-            minX = line.x - line.width / 2 - padding
-            maxX = line.x + line.width / 2 + padding
-        }
-        
+            minX = line.x - line.width / 2
+            maxX = line.x + line.width / 2
+        }  
         if (clickX >= minX &&
             clickX <= maxX &&
-            clickY >= line.y - line.height / 2 - padding &&
-            clickY <= line.y + line.height / 2 + padding) {
+            clickY >= line.y - line.height / 2&&
+            clickY <= line.y + line.height / 2) {
             return i
         }
     }

@@ -17,6 +17,11 @@ function addCanvasListeners() {
     gElCanvas.addEventListener('mousemove', onMouseMove)
     gElCanvas.addEventListener('mouseup', onMouseUp)
     gElCanvas.addEventListener('mouseleave', onMouseUp)
+    
+    // Touch events for mobile
+    gElCanvas.addEventListener('touchstart', onTouchStart)
+    gElCanvas.addEventListener('touchmove', onTouchMove)
+    gElCanvas.addEventListener('touchend', onTouchEnd)
 }
 
 function onTextInput(txt) {
@@ -131,6 +136,46 @@ function onMouseUp() {
     gIsDragging = false
     gDragLineIdx = -1
     gElCanvas.style.cursor = 'default'
+}
+
+function onTouchStart(event) {
+    event.preventDefault() 
+    const rect = gElCanvas.getBoundingClientRect()
+    const touch = event.touches[0]
+    const touchX = (touch.clientX - rect.left) * (gElCanvas.width / rect.width)
+    const touchY = (touch.clientY - rect.top) * (gElCanvas.height / rect.height)
+
+    const lineIdx = getLineIdxByPos(touchX, touchY)
+    if (lineIdx !== -1) {
+        gIsDragging = true
+        gDragLineIdx = lineIdx
+        gDragStartPos = { x: touchX, y: touchY }
+        setSelectedLine(lineIdx)
+        updateEditorInputs()
+        renderMeme()
+    }
+}
+
+function onTouchMove(event) {
+    event.preventDefault() 
+    const rect = gElCanvas.getBoundingClientRect()
+    const touch = event.touches[0]
+    const touchX = (touch.clientX - rect.left) * (gElCanvas.width / rect.width)
+    const touchY = (touch.clientY - rect.top) * (gElCanvas.height / rect.height)
+
+    if (gIsDragging && gDragLineIdx !== -1) {
+        const dx = touchX - gDragStartPos.x
+        const dy = touchY - gDragStartPos.y
+        moveLineTo(gDragLineIdx, dx, dy, gElCanvas.width, gElCanvas.height)
+        gDragStartPos = { x: touchX, y: touchY }
+        renderMeme()
+    }
+}
+
+function onTouchEnd(event) {
+    event.preventDefault()
+    gIsDragging = false
+    gDragLineIdx = -1
 }
 
 function updateEditorInputs() {
